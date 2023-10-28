@@ -1,7 +1,7 @@
 #include <Arduino.h>
 int obst = 4;
 int p = 0;
-int pin7seg[7] = {17, 5, 18, 19, 21, 22, 23}; // a,b,c,d,e,f,g
+int pin7seg[7] = {17, 15, 18, 19, 21, 22, 23}; // a,b,c,d,e,f,g
 /*
       a           ──
     f   b        |  |
@@ -44,6 +44,10 @@ void setup()
     pinMode(pin7seg[i], OUTPUT);
   }
   pinMode(obst, INPUT);
+  for (int j = 0; j < 7; j++)
+      {
+        digitalWrite(pin7seg[j], segAC[0][j]);
+      }
 }
 
 void loop()
@@ -59,9 +63,8 @@ void loop()
         p = 0;
       for (int j = 0; j < 7; j++)
       {
-        digitalWrite(pin7seg[j], segCC[p][j]);
+        digitalWrite(pin7seg[j], segAC[p][j]);
       }
     }
-    delay(1000);
   }
 }
